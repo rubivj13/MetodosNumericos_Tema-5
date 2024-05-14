@@ -31,7 +31,7 @@
 
 <h3 align = "center"> <font  font face = "bauhaus 93">  <a name="Descripción"> Descripción</a> </font> </h3>
 
-En este documento podremos observar el funcionamiento de diversos métodos, los cuales son:
+En este documento, exploraremos el funcionamiento y la aplicación de diversos métodos de interpolación. Desde técnicas clásicas como la interpolación de Lagrange y de Newton, hasta enfoques más avanzados como la interpolación de regresión y de mínimos cuadrados, cada método ofrece una forma única de aproximarse a la tarea de estimar valores intermedios a partir de datos conocidos, los métodos son:
 
   1. Método de Interpolacion de Lagrange
   2. Método de Interpolacion de Newton
@@ -73,10 +73,7 @@ El método de interpolación de Lagrange es una técnica para encontrar un polin
 <h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
 
     package Interpolación_de_lagrange;
-    /**
-     *
-     * @author Migue
-     */
+
     public class Ejercicio1 {
     
         // Método para calcular el polinomio de Lagrange
@@ -146,10 +143,6 @@ El método de interpolación de Newton es una técnica que utiliza diferencias d
 
     package Interpolación_de_newton;
     
-    /**
-     *
-     * @author Migue
-     */
     public class Ejercicio1 {
             // Método para calcular la tabla de diferencias divididas
         public static double[][] dividedDifferenceTable(double[] x, double[] y) {
@@ -236,10 +229,6 @@ La interpolación de regresión es una técnica que busca aproximar una función
 
     package Método_de_regresion;
     
-    /**
-     *
-     * @author Migue
-     */
     public class Ejercicio1 {
         
          // Método para realizar la interpolación de regresión
@@ -337,11 +326,7 @@ El método de interpolación de correlación estima valores intermedios entre pu
     package Método_de_Correlación;
     
     import java.util.Arrays;
-    
-    /**
-     *
-     * @author Migue
-     */
+
     public class Ejercicio1 {
         
         public static void main(String[] args) {
@@ -419,10 +404,6 @@ El método de interpolación de mínimos cuadrados busca ajustar una función a 
 
     package Interpolación_de_Mínimos_Cuadrados;
     
-    /**
-     *
-     * @author Migue
-     */
     public class Ejercicio1 {
         
          public static void main(String[] args) {
@@ -512,16 +493,12 @@ El Método de Interpolación Lineal estima valores intermedios entre dos puntos 
 
     package Interpolación_Lineal;
     
-    /**
-     *
-     * @author Migue
-     */
     public class Ejercicio1 {
     
         public static void main(String[] args) {
             // Datos de entrada
-            double[] x = {1, 2, 3, 4, 5}; // Valores de x
-            double[] y = {2.5, 3.7, 5.1, 6.2, 7.8}; // Valores de y
+            double[] x = {6, 7, 8, 9, 10}; // Valores de x
+            double[] y = {2.5, 3.7, 1.5, 2.6, 7.8}; // Valores de y
     
             // Punto de interpolación
             double xInterpolation = 2.5;
@@ -553,4 +530,5 @@ El Método de Interpolación Lineal estima valores intermedios entre dos puntos 
 
 <h4> <font font face = "arial"> Programa ejecutado </h4>
 
-![Captura de pantalla 2024-05-11 211649](https://github.com/MiguelAngelFlores3/T5_Metodos-de-interpolacion/assets/167603831/3b9a77fa-6139-423f-bdf4-d39fcfd7075c)
+![Captura de pantalla 2024-05-14 082524](https://github.com/rubivj13/MetodosNumericos_Tema-5/assets/147438464/b5f1f655-7448-49fc-854a-bee06cefaefa)
+
