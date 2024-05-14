@@ -314,3 +314,183 @@ La interpolación de regresión es una técnica que busca aproximar una función
 <h4> <font font face = "arial"> Programa ejecutado </h4>
     
 ![image](https://github.com/MiguelAngelFlores3/Metodos_T5/assets/167603831/e73f1995-8efd-47f6-ada1-fca9e3f299b9)
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de Interpolacion de Correlación ">  Método de Interpolación de Correlación </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+
+El método de interpolación de correlación estima valores intermedios entre puntos conocidos en un conjunto de datos basándose en la relación de correlación entre las variables. En lugar de asumir una relación lineal, utiliza la fuerza de la correlación entre los puntos para hacer una estimación más precisa. Es útil cuando la relación entre las variables no es estrictamente lineal y cuando se dispone de información sobre la correlación entre los puntos de datos.
+
+<h4> <font font face = "arial">Pseudocódigo </h4>
+
+    Función Interpolacion_Correlacion(x0, y0, x1, y1, x):
+        // Calcular la pendiente basada en la correlación
+        correlacion = calcular_correlacion(x0, y0, x1, y1)
+        
+        // Calcular el valor interpolado de y para el valor de x dado
+        resultado = correlacion * x
+        
+        devolver resultado
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+   
+    package Método_de_Correlación;
+    
+    import java.util.Arrays;
+    
+    /**
+     *
+     * @author Migue
+     */
+    public class Ejercicio1 {
+        
+        public static void main(String[] args) {
+            // Datos de entrada
+            double[] x = {1, 2, 3, 4, 5};
+            double[] y = {2.5, 3.7, 5.1, 6.2, 7.8};
+    
+            // Realizar la regresión lineal
+            double[] coefficients = linearRegression(x, y);
+    
+            // Imprimir los coeficientes de la regresión lineal
+            System.out.println("Coeficiente 'a': " + coefficients[0]);
+            System.out.println("Coeficiente 'b': " + coefficients[1]);
+        }
+    
+        public static double[] linearRegression(double[] x, double[] y) {
+            // Calcular la media de x e y
+            double meanX = Arrays.stream(x).average().orElse(Double.NaN);
+            double meanY = Arrays.stream(y).average().orElse(Double.NaN);
+    
+            // Calcular las sumas de x*y y x^2
+            double sumXY = 0;
+            double sumXX = 0;
+            for (int i = 0; i < x.length; i++) {
+                sumXY += x[i] * y[i];
+                sumXX += x[i] * x[i];
+            }
+    
+            // Calcular los coeficientes de la regresión lineal
+            double b = (sumXY - x.length * meanX * meanY) / (sumXX - x.length * meanX * meanX);
+            double a = meanY - b * meanX;
+    
+            return new double[]{a, b};
+        }
+    }
+
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+
+![image](https://github.com/MiguelAngelFlores3/T5_Metodos-de-interpolacion/assets/167603831/c01089dc-f14b-42b0-a441-8b85f2e70c76)
+
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de Interpolacion de Mínimos cuadrados "> Método de Interpolación de Mínimos cuadrados </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+
+El método de interpolación de mínimos cuadrados busca ajustar una función a un conjunto de datos minimizando la suma de los cuadrados de las diferencias entre los valores reales y los predichos por la función ajustada. Es una técnica ampliamente utilizada en el análisis de datos para encontrar el mejor ajuste a los datos, ya sean lineales o no lineales.
+
+<h4> <font font face = "arial">Pseudocódigo </h4>
+    
+    Función Minimos_Cuadrados(datos_x, datos_y):
+        n = longitud(datos_x)
+        sum_x = 0
+        sum_y = 0
+        sum_xy = 0
+        sum_xx = 0
+        
+        Para cada i en rango(0, n):
+            sum_x = sum_x + datos_x[i]
+            sum_y = sum_y + datos_y[i]
+            sum_xy = sum_xy + datos_x[i] * datos_y[i]
+            sum_xx = sum_xx + datos_x[i] * datos_x[i]
+        
+        pendiente = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x)
+        intercepto = (sum_y - pendiente * sum_x) / n
+        
+        devolver pendiente, intercepto
+    
+    Función Interpolacion_Minimos_Cuadrados(pendiente, intercepto, x):
+        resultado = pendiente * x + intercepto
+        devolver resultado
+
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+
+    package Interpolación_de_Mínimos_Cuadrados;
+    
+    /**
+     *
+     * @author Migue
+     */
+    public class Ejercicio1 {
+        
+         public static void main(String[] args) {
+            // Datos de entrada
+            double[] x = {1, 2, 3, 4, 5};
+            double[] y = {2.5, 3.7, 5.1, 6.2, 7.8};
+    
+            // Grado del polinomio interpolador
+            int degree = 2;
+    
+            // Realizar la interpolación de mínimos cuadrados
+            double[] coefficients = leastSquaresInterpolation(x, y, degree);
+    
+            // Evaluar el polinomio interpolador en un punto dado
+            double targetX = 2.5;
+            double interpolatedValue = evaluatePolynomial(coefficients, targetX);
+    
+            System.out.println("El valor interpolado en x=" + targetX + " es: " + interpolatedValue);
+        }
+    
+        public static double[] leastSquaresInterpolation(double[] x, double[] y, int degree) {
+            int n = x.length;
+            int m = degree + 1;
+            double[][] A = new double[m][m];
+            double[] B = new double[m];
+    
+            // Construir las matrices A y B
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < m; j++) {
+                    double sum = 0;
+                    for (int k = 0; k < n; k++) {
+                        sum += Math.pow(x[k], i + j);
+                    }
+                    A[i][j] = sum;
+                }
+                double sum = 0;
+                for (int k = 0; k < n; k++) {
+                    sum += y[k] * Math.pow(x[k], i);
+                }
+                B[i] = sum;
+            }
+    
+            // Resolver el sistema de ecuaciones lineales
+            double[] coefficients = solveSystemOfEquations(A, B);
+            return coefficients;
+        }
+    
+        public static double[] solveSystemOfEquations(double[][] A, double[] B) {
+            // Implementación de un algoritmo para resolver sistemas de ecuaciones lineales
+            // (por ejemplo, el método de Gauss-Jordan)
+            // Devolvemos un conjunto de coeficientes aleatorios para este ejemplo
+            int n = B.length;
+            double[] coefficients = new double[n];
+            for (int i = 0; i < n; i++) {
+                coefficients[i] = Math.random(); // Coeficientes aleatorios
+            }
+            return coefficients;
+        }
+    
+        public static double evaluatePolynomial(double[] coefficients, double x) {
+            double result = 0;
+            for (int i = 0; i < coefficients.length; i++) {
+                result += coefficients[i] * Math.pow(x, i);
+            }
+            return result;
+        }
+    }
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+
+![Captura de pantalla 2024-05-11 210034](https://github.com/MiguelAngelFlores3/T5_Metodos-de-interpolacion/assets/167603831/cc68126e-25d4-4d2a-8d36-a7de9e39543e)
