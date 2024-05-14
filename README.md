@@ -494,3 +494,63 @@ El método de interpolación de mínimos cuadrados busca ajustar una función a 
 <h4> <font font face = "arial"> Programa ejecutado </h4>
 
 ![Captura de pantalla 2024-05-11 210034](https://github.com/MiguelAngelFlores3/T5_Metodos-de-interpolacion/assets/167603831/cc68126e-25d4-4d2a-8d36-a7de9e39543e)
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de Interpolacion Lineal  "> Método de Interpolación Lineal </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+El Método de Interpolación Lineal estima valores intermedios entre dos puntos conocidos en un conjunto de datos asumiendo una relación lineal entre ellos. Se utiliza la ecuación de la recta que pasa por los dos puntos para encontrar el valor intermedio deseado. Es una técnica simple y rápida, pero puede no ser precisa en situaciones donde la relación no es verdaderamente lineal.
+
+<h4> <font font face = "arial">Pseudocódigo </h4>
+
+    Función Interpolacion_Lineal(x0, y0, x1, y1, x):
+        pendiente = (y1 - y0) / (x1 - x0)
+        resultado = y0 + pendiente * (x - x0)
+        devolver resultado
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+
+    package Interpolación_Lineal;
+    
+    /**
+     *
+     * @author Migue
+     */
+    public class Ejercicio1 {
+    
+        public static void main(String[] args) {
+            // Datos de entrada
+            double[] x = {1, 2, 3, 4, 5}; // Valores de x
+            double[] y = {2.5, 3.7, 5.1, 6.2, 7.8}; // Valores de y
+    
+            // Punto de interpolación
+            double xInterpolation = 2.5;
+    
+            // Realizar la interpolación lineal
+            double yInterpolated = linearInterpolation(x, y, xInterpolation);
+    
+            // Imprimir el resultado
+            System.out.println("El valor interpolado en x=" + xInterpolation + " es: " + yInterpolated);
+        }
+    
+        public static double linearInterpolation(double[] x, double[] y, double xInterpolation) {
+            int n = x.length;
+    
+            // Encontrar el índice i tal que x[i] <= xInterpolation < x[i+1]
+            int i = 0;
+            while (i < n - 1 && x[i] < xInterpolation) {
+                i++;
+            }
+    
+            // Calcular la pendiente (m) y el intercepto (b) de la recta entre (x[i], y[i]) y (x[i+1], y[i+1])
+            double m = (y[i + 1] - y[i]) / (x[i + 1] - x[i]);
+            double b = y[i] - m * x[i];
+    
+            // Calcular el valor interpolado
+            return m * xInterpolation + b;
+        }
+    }
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+
+![Captura de pantalla 2024-05-11 211649](https://github.com/MiguelAngelFlores3/T5_Metodos-de-interpolacion/assets/167603831/3b9a77fa-6139-423f-bdf4-d39fcfd7075c)
