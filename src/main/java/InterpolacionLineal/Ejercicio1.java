@@ -25,6 +25,8 @@ public class Ejercicio1 {
     }
 
     public static void main(String[] args) {
+        System.out.println("Ejercicio 1 - Interpolación Lineal");
+        
         // Ejemplo de puntos de datos
         double[] x = {1, 2, 3, 4, 5};
         double[] y = {2, 3, 5, 7, 11};
